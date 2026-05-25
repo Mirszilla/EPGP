@@ -5,92 +5,119 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Icecrown Citadel - Guild Core</title>
 <style>
-body {
-    margin: 0;
-    padding: 20px;
-    font-family: Georgia, serif;
-    color: #e5d9a0;
-    text-align: center;
-    background: #0a0a0f;
+body{
+margin:0;
+padding:20px;
+font-family:Georgia,serif;
+color:#d7f0ff;
+text-align:center;
+background: radial-gradient(circle at top, #0b1a2a, #000000);
+overflow-x:hidden;
 }
-.parallax {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 120%;
-    z-index: -3;
-    background-image: url('https://images.alphacoders.com/121/121966.jpg');
-    background-size: cover;
-    background-position: center;
+.parallax{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:120%;
+z-index:-3;
+background-image:url('https://images.alphacoders.com/121/121966.jpg');
+background-size:cover;
+background-position:center;
+filter:brightness(0.5);
 }
-.frame {
-    max-width: 1300px;
-    margin: 40px auto;
-    padding: 30px;
-    background: rgba(8, 12, 25, 0.95);
-    border-radius: 12px;
-    box-shadow: 0 0 30px rgba(80, 160, 255, 0.4);
+.frame{
+max-width:1200px;
+margin:60px auto;
+padding:25px;
+background:rgba(10,20,35,0.95);
+border-radius:12px;
+border:1px solid #2b4d6d;
+box-shadow:0 0 25px rgba(80,160,255,0.25);
 }
-h1 {
-    font-size: 3.2em;
-    letter-spacing: 6px;
-    color: #80c8ff;
-    text-shadow: 0 0 20px #3a9dff, 0 0 40px #1e5fb3;
-    margin-bottom: 8px;
+h1{
+font-size:3em;
+letter-spacing:5px;
+background:linear-gradient(180deg,#e8f7ff,#9fdcff,#3a7fbf,#0b1a2a);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:0 0 15px #4db8ff;
 }
-.subtitle {
-    color: #a8d4ff;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-size: 1.1em;
+.subtitle{
+color:#a8d4ff;
+text-transform:uppercase;
+letter-spacing:3px;
 }
-table {
-    margin: 30px auto;
-    width: 95%;
-    border-collapse: collapse;
-    background: rgba(15, 25, 45, 0.95);
-    border: 1px solid #4a8cff;
+table{
+margin:30px auto;
+width:100%;
+border-collapse:collapse;
+background:rgba(10,20,35,0.95);
+border:1px solid #1f3a55;
 }
-th, td {
-    border: 1px solid #2a5a99;
-    padding: 14px 12px;
-    text-align: left;
+th,td{
+border:1px solid #1f3a55;
+padding:10px;
 }
-th {
-    background: linear-gradient(#102a50, #08172f);
-    color: #ffdd88;
+th{
+background:linear-gradient(180deg,#1b3a5a,#0b1a2a);
+color:#bfe6ff;
+text-shadow:0 0 8px #4db8ff;
 }
-.login-box {
-    max-width: 480px;
-    margin: 50px auto;
-    padding: 40px;
-    background: rgba(8,12,25,0.97);
-    border: 2px solid #4a8cff;
-    border-radius: 12px;
+td{
+color:#d7f0ff;
 }
-button {
-    padding: 14px 28px;
-    background: #1e3a6b;
-    color: #a8d4ff;
-    border: 1px solid #4a8cff;
-    cursor: pointer;
-    border-radius: 8px;
+.prio{
+color:#ffd36b;
+font-weight:bold;
+text-shadow:0 0 6px #ffb84d;
+}
+.login-box{
+max-width:500px;
+margin:50px auto;
+padding:40px;
+background:rgba(8,12,25,0.97);
+border:2px solid #4a8cff;
+border-radius:12px;
+box-shadow:0 0 25px rgba(70,170,255,.4);
+}
+button{
+padding:12px 24px;
+background:#0b1a2a;
+color:#a8d4ff;
+border:1px solid #4a8cff;
+cursor:pointer;
+border-radius:8px;
+font-size:1.1em;
+}
+#musicBtn{
+margin:10px;
+padding:8px 14px;
+background:#0b1a2a;
+color:#a8d4ff;
+border:1px solid #2b4d6d;
+cursor:pointer;
 }
 </style>
 </head>
 <body>
 <div class="parallax"></div>
+<button id="musicBtn">▶ Play Music</button>
+<audio id="music" loop>
+<source src="musiclk-theme.mp3" type="audio/mpeg">
+</audio>
 
 <div class="frame">
     <h1>ICECROWN CITADEL</h1>
-    <div class="subtitle">CORE • ALTS • EPGP PRIORITY</div>
+    <div class="subtitle">Core • Alts • EPGP Priority</div>
 
+    <!-- LOGIN SCREEN -->
     <div id="passwordScreen" class="login-box">
-        <h2 style="color:#80c8ff;">Character Authentication</h2>
-        <p style="color:#a8d4ff;">Select your Main Character & Enter Password</p>
+        <h2 style="color:#80c8ff;">Realm Authentication</h2>
+        <p style="color:#a8d4ff;">SELECT CHARACTER & ENTER PASSWORD</p>
         
-        <select id="charSelect" style="width:80%; padding:12px; margin:15px 0; background:#0f1f3a; color:#d0e0ff; border:1px solid #4a8cff;">
-            <option value="">-- Select Main Character --</option>
-            <!-- Todos os mains aqui -->
+        <select id="charSelect" style="width:85%; padding:12px; margin:15px 0; background:#0b1a2a; color:#d7f0ff; border:1px solid #4a8cff;">
+            <option value="">-- Select Character --</option>
             <option>Pgr</option>
             <option>Upload</option>
             <option>Lothair</option>
@@ -123,105 +150,102 @@ button {
             <option>Belladudu</option>
         </select>
         <br><br>
-        <input type="password" id="passInput" placeholder="Password" style="width:80%; padding:12px; background:#0f1f3a; color:#d0e0ff; border:1px solid #4a8cff;">
+        <input type="password" id="passInput" placeholder="Password" style="width:85%; padding:12px; background:#0b1a2a; color:#d7f0ff; border:1px solid #4a8cff;">
         <br><br>
         <button onclick="checkPassword()">Enter Icecrown</button>
-        <div id="loginError" style="color:#ff6666; margin-top:15px;"></div>
+        <div id="loginError" style="color:#ff6666; margin-top:15px; font-weight:bold;"></div>
     </div>
 
+    <!-- TABELA -->
     <div id="content" style="display:none;">
         <table>
             <thead>
                 <tr>
                     <th>Main</th>
-                    <th>Pending List</th>
-                    <th>EP / GP</th>
-                    <th>Priority</th>
+                    <th>Alts</th>
+                    <th>EP,GP</th>
+                    <th>Priority (EP/GP)</th>
                 </tr>
             </thead>
             <tbody id="tableBody">
-                <!-- Linhas serão preenchidas aqui -->
+                <tr><td>Pgr</td><td><select><option>NA</option></select></td><td class="epgp">9900,1000</td><td class="prio"></td></tr>
+                <tr><td>Upload</td><td><select><option>Dookman</option></select></td><td class="epgp">66800,5100</td><td class="prio"></td></tr>
+                <tr><td>Lothair</td><td><select><option>Brynhiildr</option><option>Yajirushi</option><option>Reystov</option><option>Ansbach</option><option>Glaicad</option></select></td><td class="epgp">69400,9025</td><td class="prio"></td></tr>
+                <tr><td>Noctisumbra</td><td><select><option>NA</option></select></td><td class="epgp">60800,7650</td><td class="prio"></td></tr>
+                <tr><td>Shpicy</td><td><select><option>NA</option></select></td><td class="epgp">69450,5550</td><td class="prio"></td></tr>
+                <tr><td>Ardelle</td><td><select><option>Bowen</option></select></td><td class="epgp">26350,2300</td><td class="prio"></td></tr>
+                <tr><td>Slutbunny</td><td><select><option>NA</option></select></td><td class="epgp">68950,7250</td><td class="prio"></td></tr>
+                <tr><td>Icaru</td><td><select><option>Yushiana</option></select></td><td class="epgp">56700,10250</td><td class="prio"></td></tr>
+                <tr><td>Emilade</td><td><select><option>NA</option></select></td><td class="epgp">26800,9750</td><td class="prio"></td></tr>
+                <tr><td>Euphemina</td><td><select><option>NA</option></select></td><td class="epgp">64650,8100</td><td class="prio"></td></tr>
+                <tr><td>Holybanyan</td><td><select><option>Sunstorm</option><option>Astralnova</option><option>Swiftjaina</option><option>Sunshadow</option></select></td><td class="epgp">8600,2000</td><td class="prio"></td></tr>
+                <tr><td>Danspatanku</td><td><select><option>NA</option></select></td><td class="epgp">51800,5900</td><td class="prio"></td></tr>
+                <tr><td>Elsen</td><td><select><option>Alaindor</option><option>Lapelua</option><option>Elsin</option></select></td><td class="epgp">74000,8400</td><td class="prio"></td></tr>
+                <tr><td>Demonshroute</td><td><select><option>NA</option></select></td><td class="epgp">37150,4875</td><td class="prio"></td></tr>
+                <tr><td>Meiyla</td><td><select><option>Etzio</option><option>Errnuul</option></select></td><td class="epgp">63600,7150</td><td class="prio"></td></tr>
+                <tr><td>Serpentis</td><td><select><option>Arachnos</option></select></td><td class="epgp">37550,8225</td><td class="prio"></td></tr>
+                <tr><td>Derbbin</td><td><select><option>Brodobaggins</option><option>Yosho</option></select></td><td class="epgp">39950,14850</td><td class="prio"></td></tr>
+                <tr><td>Salenlord</td><td><select><option>NA</option></select></td><td class="epgp">53450,6800</td><td class="prio"></td></tr>
+                <tr><td>Kibencis</td><td><select><option>Solanja</option><option>Frankenson</option><option>Kanhuurn</option><option>Zolanja</option></select></td><td class="epgp">73350,10250</td><td class="prio"></td></tr>
+                <tr><td>Zxdantexz</td><td><select><option>Vdantev</option></select></td><td class="epgp">28550,7550</td><td class="prio"></td></tr>
+                <tr><td>Fenring</td><td><select><option>Chani</option></select></td><td class="epgp">68250,10300</td><td class="prio"></td></tr>
+                <tr><td>Amiira</td><td><select><option>NA</option></select></td><td class="epgp">53800,6600</td><td class="prio"></td></tr>
+                <tr><td>Ilsdll</td><td><select><option>Sdpal</option><option>Sdboom</option></select></td><td class="epgp">25850,2500</td><td class="prio"></td></tr>
+                <tr><td>Ktharsis</td><td><select><option>NA</option></select></td><td class="epgp">35400,4100</td><td class="prio"></td></tr>
+                <tr><td>Gavrilla</td><td><select><option>NA</option></select></td><td class="epgp">35150,3775</td><td class="prio"></td></tr>
+                <tr><td>Sekewar</td><td><select><option>Sekemage</option></select></td><td class="epgp">65500,11050</td><td class="prio"></td></tr>
+                <tr><td>Nikandros</td><td><select><option>Mirsini</option><option>Pinelopi</option><option>Aristomenis</option></select></td><td class="epgp">53750,6400</td><td class="prio"></td></tr>
+                <tr><td>Velithria</td><td><select><option>Morvana</option></select></td><td class="epgp">36650,5250</td><td class="prio"></td></tr>
+                <tr><td>Eddelle</td><td><select><option>Mirsilla</option><option>Nidril</option><option>Lurani</option><option>Nirsilla</option></select></td><td class="epgp">51750,5850</td><td class="prio"></td></tr>
+                <tr><td>Belladudu</td><td><select><option>Bellesygin</option><option>Magicbelle</option><option>Bloodybelle</option><option>Corpuscristi</option><option>Bellagrace</option></select></td><td class="epgp">38650,8751</td><td class="prio"></td></tr>
             </tbody>
         </table>
     </div>
 </div>
 
 <script>
-const data = [
-    {main: "Upload", alt: "Dookman", epgp: "66800 / 5100"},
-    {main: "Ardelle", alt: "Bowen", epgp: "26350 / 2300"},
-    {main: "Lothair", alt: "Brynhiildr", epgp: "69400 / 9025"},
-    {main: "Kibencis", alt: "Solanja", epgp: "73350 / 10250"},
-    {main: "Velithria", alt: "Morvana", epgp: "36650 / 5250"},
-    {main: "Fenring", alt: "Chani", epgp: "68250 / 10300"},
-    {main: "Belladudu", alt: "Magicbelle", epgp: "38650 / 8751"},
-    {main: "Pgr", alt: "", epgp: ""},
-    {main: "Noctisumbra", alt: "", epgp: ""},
-    {main: "Shpicy", alt: "", epgp: ""},
-    {main: "Slutbunny", alt: "", epgp: ""},
-    {main: "Icaru", alt: "", epgp: ""},
-    {main: "Emilade", alt: "", epgp: ""},
-    {main: "Euphemina", alt: "", epgp: ""},
-    {main: "Holybanyan", alt: "", epgp: ""},
-    {main: "Danspatanku", alt: "", epgp: ""},
-    {main: "Elsen", alt: "", epgp: ""},
-    {main: "Demonshroute", alt: "", epgp: ""},
-    {main: "Meiyla", alt: "", epgp: ""},
-    {main: "Serpentis", alt: "", epgp: ""},
-    {main: "Derbbin", alt: "", epgp: ""},
-    {main: "Salenlord", alt: "", epgp: ""},
-    {main: "Zxdantexz", alt: "", epgp: ""},
-    {main: "Amiira", alt: "", epgp: ""},
-    {main: "Ilsdll", alt: "", epgp: ""},
-    {main: "Ktharsis", alt: "", epgp: ""},
-    {main: "Gavrilla", alt: "", epgp: ""},
-    {main: "Sekewar", alt: "", epgp: ""},
-    {main: "Nikandros", alt: "", epgp: ""},
-    {main: "Eddelle", alt: "", epgp: ""}
-];
+/* MUSIC */
+document.getElementById("musicBtn").addEventListener("click",function(){
+    document.getElementById("music").play();
+    this.style.display="none";
+});
 
-function loadTable() {
-    const tbody = document.getElementById("tableBody");
-    tbody.innerHTML = "";
-    data.forEach(row => {
-        const tr = document.createElement("tr");
-        tr.innerHTML = `
-            <td>${row.main}</td>
-            <td>${row.alt}</td>
-            <td>${row.epgp}</td>
-            <td class="priority"></td>
-        `;
-        tbody.appendChild(tr);
-    });
-    calculatePriorities();
-}
-
-function calculatePriorities() {
-    document.querySelectorAll("tbody tr").forEach(tr => {
-        const epgpCell = tr.cells[2];
-        const priorityCell = tr.cells[3];
-        if (epgpCell && epgpCell.textContent.includes("/")) {
-            const [ep, gp] = epgpCell.textContent.split("/").map(n => parseFloat(n.trim()));
-            if (!isNaN(ep) && !isNaN(gp)) {
-                const prio = (ep / gp).toFixed(2);
-                priorityCell.textContent = prio;
-            }
-        }
-    });
-}
-
+/* LOGIN */
 function checkPassword(){
     const pass = document.getElementById("passInput").value;
     const error = document.getElementById("loginError");
 
-    if(pass === "guild123"){
+    if(pass === "guild123"){   // ← Muda aqui a password se quiseres
         document.getElementById("passwordScreen").style.display = "none";
         document.getElementById("content").style.display = "block";
-        loadTable();
     } else {
         error.textContent = "Incorrect Password";
     }
 }
+
+/* CALC + SORT PRIORITY */
+function updateTable(){
+    const tbody = document.getElementById("tableBody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    
+    rows.forEach(row => {
+        const cell = row.querySelector(".epgp");
+        const prioCell = row.querySelector(".prio");
+        if(cell){
+            const parts = cell.textContent.split(",");
+            const ep = parseFloat(parts[0]) || 0;
+            const gp = parseFloat(parts[1]) || 1;
+            prioCell.textContent = (ep / gp).toFixed(2);
+        }
+    });
+
+    // Sort by priority
+    rows.sort((a,b) => {
+        return parseFloat(b.querySelector(".prio").textContent) - parseFloat(a.querySelector(".prio").textContent);
+    });
+    rows.forEach(r => tbody.appendChild(r));
+}
+updateTable();
 </script>
 </body>
 </html>
