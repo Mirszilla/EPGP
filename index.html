@@ -10,9 +10,9 @@ body{
 margin:0;
 padding:20px;
 font-family:Georgia,serif;
-color:#d7f0ff;
+color:#e5d9a0;
 text-align:center;
-background: radial-gradient(circle at top, #0b1a2a, #000000);
+background:#000;
 overflow-x:hidden;
 }
 
@@ -26,17 +26,38 @@ z-index:-3;
 background-image:url('https://images.alphacoders.com/121/121966.jpg');
 background-size:cover;
 background-position:center;
-filter:brightness(0.5);
+}
+
+body::before{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-2;
+pointer-events:none;
+background:radial-gradient(circle at 50% 30%,rgba(120,220,255,.25),transparent 60%);
+animation:frost 6s ease-in-out infinite;
+mix-blend-mode:screen;
+}
+
+@keyframes frost{
+0%{transform:scale(1);opacity:.35;}
+50%{transform:scale(1.15);opacity:.65;}
+100%{transform:scale(1);opacity:.35;}
 }
 
 .frame{
-max-width:1200px;
+max-width:1300px;
 margin:60px auto;
 padding:25px;
-background:rgba(10,20,35,0.95);
+background:rgba(10,10,20,.92);
 border-radius:12px;
-border:1px solid #2b4d6d;
-box-shadow:0 0 25px rgba(80,160,255,0.25);
+box-shadow:
+0 0 0 2px rgba(140,220,255,.3),
+0 0 25px rgba(80,160,255,.3),
+inset 0 0 25px rgba(120,220,255,.15);
 }
 
 h1{
@@ -45,7 +66,7 @@ letter-spacing:5px;
 background:linear-gradient(180deg,#e8f7ff,#9fdcff,#3a7fbf,#0b1a2a);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
-text-shadow:0 0 15px #4db8ff;
+text-shadow:0 0 20px #3aa0ff;
 }
 
 .subtitle{
@@ -54,43 +75,84 @@ text-transform:uppercase;
 letter-spacing:3px;
 }
 
+button{
+padding:12px 18px;
+background:#10203a;
+color:#a8d4ff;
+border:1px solid #4faeff;
+cursor:pointer;
+border-radius:8px;
+font-weight:bold;
+}
+
+button:hover{
+background:#18355f;
+}
+
 table{
 margin:30px auto;
-width:100%;
+width:95%;
 border-collapse:collapse;
-background:rgba(10,20,35,0.95);
-border:1px solid #1f3a55;
+background:rgba(15,25,45,.95);
 }
 
 th,td{
-border:1px solid #1f3a55;
-padding:10px;
+border:1px solid #4faeff;
+padding:12px;
 }
 
 th{
-background:linear-gradient(180deg,#1b3a5a,#0b1a2a);
-color:#bfe6ff;
-text-shadow:0 0 8px #4db8ff;
+background:linear-gradient(#102a45,#09111f);
+color:#ffdd66;
 }
 
-td{
-color:#d7f0ff;
-}
-
-.prio{
-color:#ffd36b;
-font-weight:bold;
-text-shadow:0 0 6px #ffb84d;
-}
-
-/* MUSIC BUTTON */
-#musicBtn{
-margin:10px;
-padding:8px 14px;
-background:#0b1a2a;
+select{
+background:#09111f;
 color:#a8d4ff;
-border:1px solid #2b4d6d;
-cursor:pointer;
+border:1px solid #4faeff;
+padding:6px;
+}
+
+.login-box{
+max-width:500px;
+margin:40px auto;
+padding:35px;
+background:rgba(8,12,25,.96);
+border:2px solid #4faeff;
+box-shadow:
+0 0 25px rgba(70,170,255,.35),
+inset 0 0 30px rgba(90,180,255,.12);
+border-radius:14px;
+}
+
+.login-box h2{
+font-size:2em;
+color:#9fdcff;
+text-shadow:0 0 12px #3aa0ff;
+}
+
+.login-subtitle{
+color:#d5e9ff;
+letter-spacing:2px;
+text-transform:uppercase;
+font-size:.9em;
+}
+
+.login-box select,
+.login-box input{
+width:80%;
+padding:12px;
+background:#09111f;
+border:1px solid #4faeff;
+color:#dff5ff;
+border-radius:8px;
+}
+
+#loginError{
+margin-top:18px;
+color:#ff6666;
+font-weight:bold;
+text-shadow:0 0 8px red;
 }
 </style>
 </head>
@@ -99,7 +161,7 @@ cursor:pointer;
 
 <div class="parallax"></div>
 
-<button id="musicBtn">▶ Play Music</button>
+<button id="musicBtn">▶ Play Sound</button>
 
 <audio id="music" loop>
 <source src="musiclk-theme.mp3" type="audio/mpeg">
@@ -108,91 +170,114 @@ cursor:pointer;
 <div class="frame">
 
 <h1>ICECROWN CITADEL</h1>
-<div class="subtitle">Core • Alts • EPGP System</div>
+<div class="subtitle">Core • Alts • EPGP Priority</div>
+
+<div id="passwordScreen" class="login-box">
+
+<h2>Realm Authentication</h2>
+<p class="login-subtitle">Select Character & Enter Password</p>
+
+<select id="charSelect">
+<option value="">-- Select Character --</option>
+<option>Pgr</option>
+<option>Upload</option>
+<option>Lothair</option>
+<option>Belladudu</option>
+<option>Fenring</option>
+<option>Kibencis</option>
+<option>Velithria</option>
+<option>Ardelle</option>
+</select>
+
+<br><br>
+
+<input type="password" id="passInput" placeholder="Password">
+
+<br><br>
+
+<button onclick="checkPassword()">Enter Icecrown</button>
+
+<div id="loginError"></div>
+
+</div>
+
+<div id="content" style="display:none;">
 
 <table>
 <thead>
 <tr>
 <th>Main</th>
-<th>Alts</th>
-<th>EP,GP</th>
-<th>Priority (EP/GP)</th>
+<th>Pending List</th>
+<th>EP / GP</th>
+<th>Priority</th>
 </tr>
 </thead>
 
-<tbody id="tableBody">
+<tbody>
 
-<tr><td>Pgr</td><td><select><option>NA</option></select></td><td class="epgp">9900,1000</td><td class="prio"></td></tr>
-<tr><td>Upload</td><td><select><option>Dookman</option></select></td><td class="epgp">66800,5100</td><td class="prio"></td></tr>
-<tr><td>Lothair</td><td><select><option>Brynhiildr</option><option>Yajirushi</option><option>Reystov</option><option>Ansbach</option><option>Glaicad</option></select></td><td class="epgp">69400,9025</td><td class="prio"></td></tr>
-<tr><td>Noctisumbra</td><td><select><option>NA</option></select></td><td class="epgp">60800,7650</td><td class="prio"></td></tr>
-<tr><td>Shpicy</td><td><select><option>NA</option></select></td><td class="epgp">69450,5550</td><td class="prio"></td></tr>
-<tr><td>Ardelle</td><td><select><option>Bowen</option></select></td><td class="epgp">26350,2300</td><td class="prio"></td></tr>
-<tr><td>Slutbunny</td><td><select><option>NA</option></select></td><td class="epgp">68950,7250</td><td class="prio"></td></tr>
-<tr><td>Icaru</td><td><select><option>Yushiana</option></select></td><td class="epgp">56700,10250</td><td class="prio"></td></tr>
-<tr><td>Emilade</td><td><select><option>NA</option></select></td><td class="epgp">26800,9750</td><td class="prio"></td></tr>
-<tr><td>Euphemina</td><td><select><option>NA</option></select></td><td class="epgp">64650,8100</td><td class="prio"></td></tr>
-<tr><td>Holybanyan</td><td><select><option>Sunstorm</option><option>Astralnova</option><option>Swiftjaina</option><option>Sunshadow</option></select></td><td class="epgp">8600,2000</td><td class="prio"></td></tr>
-<tr><td>Danspatanku</td><td><select><option>NA</option></select></td><td class="epgp">51800,5900</td><td class="prio"></td></tr>
-<tr><td>Elsen</td><td><select><option>Alaindor</option><option>Lapelua</option><option>Elsin</option></select></td><td class="epgp">74000,8400</td><td class="prio"></td></tr>
-<tr><td>Demonshroute</td><td><select><option>NA</option></select></td><td class="epgp">37150,4875</td><td class="prio"></td></tr>
-<tr><td>Meiyla</td><td><select><option>Etzio</option><option>Errnuul</option></select></td><td class="epgp">63600,7150</td><td class="prio"></td></tr>
-<tr><td>Serpentis</td><td><select><option>Arachnos</option></select></td><td class="epgp">37550,8225</td><td class="prio"></td></tr>
-<tr><td>Derbbin</td><td><select><option>Brodobaggins</option><option>Yosho</option></select></td><td class="epgp">39950,14850</td><td class="prio"></td></tr>
-<tr><td>Salenlord</td><td><select><option>NA</option></select></td><td class="epgp">53450,6800</td><td class="prio"></td></tr>
-<tr><td>Kibencis</td><td><select><option>Solanja</option><option>Frankenson</option><option>Kanhuurn</option><option>Zolanja</option></select></td><td class="epgp">73350,10250</td><td class="prio"></td></tr>
-<tr><td>Zxdantexz</td><td><select><option>Vdantev</option></select></td><td class="epgp">28550,7550</td><td class="prio"></td></tr>
-<tr><td>Fenring</td><td><select><option>Chani</option></select></td><td class="epgp">68250,10300</td><td class="prio"></td></tr>
-<tr><td>Amiira</td><td><select><option>NA</option></select></td><td class="epgp">53800,6600</td><td class="prio"></td></tr>
-<tr><td>Ilsdll</td><td><select><option>Sdpal</option><option>Sdboom</option></select></td><td class="epgp">25850,2500</td><td class="prio"></td></tr>
-<tr><td>Ktharsis</td><td><select><option>NA</option></select></td><td class="epgp">35400,4100</td><td class="prio"></td></tr>
-<tr><td>Gavrilla</td><td><select><option>NA</option></select></td><td class="epgp">35150,3775</td><td class="prio"></td></tr>
-<tr><td>Sekewar</td><td><select><option>Sekemage</option></select></td><td class="epgp">65500,11050</td><td class="prio"></td></tr>
-<tr><td>Nikandros</td><td><select><option>Mirsini</option><option>Pinelopi</option><option>Aristomenis</option></select></td><td class="epgp">53750,6400</td><td class="prio"></td></tr>
-<tr><td>Velithria</td><td><select><option>Morvana</option></select></td><td class="epgp">36650,5250</td><td class="prio"></td></tr>
-<tr><td>Eddelle</td><td><select><option>Mirsilla</option><option>Nidril</option><option>Lurani</option><option>Nirsilla</option></select></td><td class="epgp">51750,5850</td><td class="prio"></td></tr>
-<tr><td>Belladudu</td><td><select><option>Bellesygin</option><option>Magicbelle</option><option>Bloodybelle</option><option>Corpuscristi</option><option>Bellagrace</option></select></td><td class="epgp">38650,8751</td><td class="prio"></td></tr>
+<tr><td>Fenring</td><td><select><option>Chani</option></select></td><td class="epgp">68250,10300</td><td></td></tr>
+<tr><td>Kibencis</td><td><select><option>Solanja</option></select></td><td class="epgp">73350,10250</td><td></td></tr>
+<tr><td>Belladudu</td><td><select><option>Magicbelle</option></select></td><td class="epgp">38650,8751</td><td></td></tr>
+<tr><td>Upload</td><td><select><option>Dookman</option></select></td><td class="epgp">66800,5100</td><td></td></tr>
+<tr><td>Lothair</td><td><select><option>Brynhiildr</option></select></td><td class="epgp">69400,9025</td><td></td></tr>
+<tr><td>Velithria</td><td><select><option>Morvana</option></select></td><td class="epgp">36650,5250</td><td></td></tr>
+<tr><td>Ardelle</td><td><select><option>Bowen</option></select></td><td class="epgp">26350,2300</td><td></td></tr>
 
 </tbody>
 </table>
 
 </div>
+</div>
 
 <script>
 
-/* MUSIC */
+function checkPassword(){
+
+const selected=document.getElementById("charSelect").value;
+const pass=document.getElementById("passInput").value;
+const error=document.getElementById("loginError");
+
+if(!selected){
+error.textContent="Select a character first.";
+return;
+}
+
+if(pass==="guild123"){
+document.getElementById("passwordScreen").style.display="none";
+document.getElementById("content").style.display="block";
+}else{
+error.textContent="Authentication Failed";
+}
+}
+
 document.getElementById("musicBtn").addEventListener("click",function(){
 document.getElementById("music").play();
 this.style.display="none";
 });
 
-/* CALC + SORT PRIORITY */
-function updateTable(){
+function calcPriority(){
 
-const tbody = document.getElementById("tableBody");
-const rows = Array.from(tbody.querySelectorAll("tr"));
+const rows=[...document.querySelectorAll("tbody tr")];
 
-rows.forEach(row=>{
-const cell = row.querySelector(".epgp");
-const prioCell = row.querySelector(".prio");
+rows.forEach(r=>{
 
-const parts = cell.textContent.split(",");
+const epgp=r.querySelector(".epgp").textContent.split(",");
+const ep=parseFloat(epgp[0]);
+const gp=parseFloat(epgp[1]);
+const prio=(ep/gp).toFixed(2);
 
-const ep = parseFloat(parts[0]) || 0;
-const gp = parseFloat(parts[1]) || 1;
+r.cells[3].textContent=prio;
 
-prioCell.textContent = (ep / gp).toFixed(2);
 });
 
-rows.sort((a,b)=>{
-return parseFloat(b.querySelector(".prio").textContent) -
-parseFloat(a.querySelector(".prio").textContent);
-});
+rows.sort((a,b)=>parseFloat(b.cells[3].textContent)-parseFloat(a.cells[3].textContent));
 
+const tbody=document.querySelector("tbody");
 rows.forEach(r=>tbody.appendChild(r));
+
 }
 
-updateTable();
+calcPriority();
 
 </script>
 
