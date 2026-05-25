@@ -4,282 +4,224 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Icecrown Citadel - Guild Core</title>
-
 <style>
-body{
-margin:0;
-padding:20px;
-font-family:Georgia,serif;
-color:#e5d9a0;
-text-align:center;
-background:#000;
-overflow-x:hidden;
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Georgia, serif;
+    color: #e5d9a0;
+    text-align: center;
+    background: #0a0a0f;
 }
-
-.parallax{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:120%;
-z-index:-3;
-background-image:url('https://images.alphacoders.com/121/121966.jpg');
-background-size:cover;
-background-position:center;
+.parallax {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 120%;
+    z-index: -3;
+    background-image: url('https://images.alphacoders.com/121/121966.jpg');
+    background-size: cover;
+    background-position: center;
 }
-
-body::before{
-content:"";
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-z-index:-2;
-pointer-events:none;
-background:radial-gradient(circle at 50% 30%,rgba(120,220,255,.25),transparent 60%);
-animation:frost 6s ease-in-out infinite;
-mix-blend-mode:screen;
+.frame {
+    max-width: 1300px;
+    margin: 40px auto;
+    padding: 30px;
+    background: rgba(8, 12, 25, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 0 30px rgba(80, 160, 255, 0.4);
 }
-
-@keyframes frost{
-0%{transform:scale(1);opacity:.35;}
-50%{transform:scale(1.15);opacity:.65;}
-100%{transform:scale(1);opacity:.35;}
+h1 {
+    font-size: 3.2em;
+    letter-spacing: 6px;
+    color: #80c8ff;
+    text-shadow: 0 0 20px #3a9dff, 0 0 40px #1e5fb3;
+    margin-bottom: 8px;
 }
-
-.frame{
-max-width:1300px;
-margin:60px auto;
-padding:25px;
-background:rgba(10,10,20,.92);
-border-radius:12px;
-box-shadow:
-0 0 0 2px rgba(140,220,255,.3),
-0 0 25px rgba(80,160,255,.3),
-inset 0 0 25px rgba(120,220,255,.15);
+.subtitle {
+    color: #a8d4ff;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 1.1em;
 }
-
-h1{
-font-size:3em;
-letter-spacing:5px;
-background:linear-gradient(180deg,#e8f7ff,#9fdcff,#3a7fbf,#0b1a2a);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-text-shadow:0 0 20px #3aa0ff;
+table {
+    margin: 30px auto;
+    width: 95%;
+    border-collapse: collapse;
+    background: rgba(15, 25, 45, 0.95);
+    border: 1px solid #4a8cff;
 }
-
-.subtitle{
-color:#a8d4ff;
-text-transform:uppercase;
-letter-spacing:3px;
+th, td {
+    border: 1px solid #2a5a99;
+    padding: 14px 12px;
+    text-align: left;
 }
-
-button{
-padding:12px 18px;
-background:#10203a;
-color:#a8d4ff;
-border:1px solid #4faeff;
-cursor:pointer;
-border-radius:8px;
-font-weight:bold;
+th {
+    background: linear-gradient(#102a50, #08172f);
+    color: #ffdd88;
 }
-
-button:hover{
-background:#18355f;
+.login-box {
+    max-width: 480px;
+    margin: 50px auto;
+    padding: 40px;
+    background: rgba(8,12,25,0.97);
+    border: 2px solid #4a8cff;
+    border-radius: 12px;
 }
-
-table{
-margin:30px auto;
-width:95%;
-border-collapse:collapse;
-background:rgba(15,25,45,.95);
-}
-
-th,td{
-border:1px solid #4faeff;
-padding:12px;
-}
-
-th{
-background:linear-gradient(#102a45,#09111f);
-color:#ffdd66;
-}
-
-select{
-background:#09111f;
-color:#a8d4ff;
-border:1px solid #4faeff;
-padding:6px;
-}
-
-.login-box{
-max-width:500px;
-margin:40px auto;
-padding:35px;
-background:rgba(8,12,25,.96);
-border:2px solid #4faeff;
-box-shadow:
-0 0 25px rgba(70,170,255,.35),
-inset 0 0 30px rgba(90,180,255,.12);
-border-radius:14px;
-}
-
-.login-box h2{
-font-size:2em;
-color:#9fdcff;
-text-shadow:0 0 12px #3aa0ff;
-}
-
-.login-subtitle{
-color:#d5e9ff;
-letter-spacing:2px;
-text-transform:uppercase;
-font-size:.9em;
-}
-
-.login-box select,
-.login-box input{
-width:80%;
-padding:12px;
-background:#09111f;
-border:1px solid #4faeff;
-color:#dff5ff;
-border-radius:8px;
-}
-
-#loginError{
-margin-top:18px;
-color:#ff6666;
-font-weight:bold;
-text-shadow:0 0 8px red;
+button {
+    padding: 14px 28px;
+    background: #1e3a6b;
+    color: #a8d4ff;
+    border: 1px solid #4a8cff;
+    cursor: pointer;
+    border-radius: 8px;
 }
 </style>
 </head>
-
 <body>
-
 <div class="parallax"></div>
 
-<button id="musicBtn">▶ Play Sound</button>
-
-<audio id="music" loop>
-<source src="musiclk-theme.mp3" type="audio/mpeg">
-</audio>
-
 <div class="frame">
+    <h1>ICECROWN CITADEL</h1>
+    <div class="subtitle">CORE • ALTS • EPGP PRIORITY</div>
 
-<h1>ICECROWN CITADEL</h1>
-<div class="subtitle">Core • Alts • EPGP Priority</div>
+    <div id="passwordScreen" class="login-box">
+        <h2 style="color:#80c8ff;">Character Authentication</h2>
+        <p style="color:#a8d4ff;">Select your Main Character & Enter Password</p>
+        
+        <select id="charSelect" style="width:80%; padding:12px; margin:15px 0; background:#0f1f3a; color:#d0e0ff; border:1px solid #4a8cff;">
+            <option value="">-- Select Main Character --</option>
+            <!-- Todos os mains aqui -->
+            <option>Pgr</option>
+            <option>Upload</option>
+            <option>Lothair</option>
+            <option>Noctisumbra</option>
+            <option>Shpicy</option>
+            <option>Ardelle</option>
+            <option>Slutbunny</option>
+            <option>Icaru</option>
+            <option>Emilade</option>
+            <option>Euphemina</option>
+            <option>Holybanyan</option>
+            <option>Danspatanku</option>
+            <option>Elsen</option>
+            <option>Demonshroute</option>
+            <option>Meiyla</option>
+            <option>Serpentis</option>
+            <option>Derbbin</option>
+            <option>Salenlord</option>
+            <option>Kibencis</option>
+            <option>Zxdantexz</option>
+            <option>Fenring</option>
+            <option>Amiira</option>
+            <option>Ilsdll</option>
+            <option>Ktharsis</option>
+            <option>Gavrilla</option>
+            <option>Sekewar</option>
+            <option>Nikandros</option>
+            <option>Velithria</option>
+            <option>Eddelle</option>
+            <option>Belladudu</option>
+        </select>
+        <br><br>
+        <input type="password" id="passInput" placeholder="Password" style="width:80%; padding:12px; background:#0f1f3a; color:#d0e0ff; border:1px solid #4a8cff;">
+        <br><br>
+        <button onclick="checkPassword()">Enter Icecrown</button>
+        <div id="loginError" style="color:#ff6666; margin-top:15px;"></div>
+    </div>
 
-<div id="passwordScreen" class="login-box">
-
-<h2>Realm Authentication</h2>
-<p class="login-subtitle">Select Character & Enter Password</p>
-
-<select id="charSelect">
-<option value="">-- Select Character --</option>
-<option>Pgr</option>
-<option>Upload</option>
-<option>Lothair</option>
-<option>Belladudu</option>
-<option>Fenring</option>
-<option>Kibencis</option>
-<option>Velithria</option>
-<option>Ardelle</option>
-</select>
-
-<br><br>
-
-<input type="password" id="passInput" placeholder="Password">
-
-<br><br>
-
-<button onclick="checkPassword()">Enter Icecrown</button>
-
-<div id="loginError"></div>
-
-</div>
-
-<div id="content" style="display:none;">
-
-<table>
-<thead>
-<tr>
-<th>Main</th>
-<th>Pending List</th>
-<th>EP / GP</th>
-<th>Priority</th>
-</tr>
-</thead>
-
-<tbody>
-
-<tr><td>Fenring</td><td><select><option>Chani</option></select></td><td class="epgp">68250,10300</td><td></td></tr>
-<tr><td>Kibencis</td><td><select><option>Solanja</option></select></td><td class="epgp">73350,10250</td><td></td></tr>
-<tr><td>Belladudu</td><td><select><option>Magicbelle</option></select></td><td class="epgp">38650,8751</td><td></td></tr>
-<tr><td>Upload</td><td><select><option>Dookman</option></select></td><td class="epgp">66800,5100</td><td></td></tr>
-<tr><td>Lothair</td><td><select><option>Brynhiildr</option></select></td><td class="epgp">69400,9025</td><td></td></tr>
-<tr><td>Velithria</td><td><select><option>Morvana</option></select></td><td class="epgp">36650,5250</td><td></td></tr>
-<tr><td>Ardelle</td><td><select><option>Bowen</option></select></td><td class="epgp">26350,2300</td><td></td></tr>
-
-</tbody>
-</table>
-
-</div>
+    <div id="content" style="display:none;">
+        <table>
+            <thead>
+                <tr>
+                    <th>Main</th>
+                    <th>Pending List</th>
+                    <th>EP / GP</th>
+                    <th>Priority</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                <!-- Linhas serão preenchidas aqui -->
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <script>
+const data = [
+    {main: "Upload", alt: "Dookman", epgp: "66800 / 5100"},
+    {main: "Ardelle", alt: "Bowen", epgp: "26350 / 2300"},
+    {main: "Lothair", alt: "Brynhiildr", epgp: "69400 / 9025"},
+    {main: "Kibencis", alt: "Solanja", epgp: "73350 / 10250"},
+    {main: "Velithria", alt: "Morvana", epgp: "36650 / 5250"},
+    {main: "Fenring", alt: "Chani", epgp: "68250 / 10300"},
+    {main: "Belladudu", alt: "Magicbelle", epgp: "38650 / 8751"},
+    {main: "Pgr", alt: "", epgp: ""},
+    {main: "Noctisumbra", alt: "", epgp: ""},
+    {main: "Shpicy", alt: "", epgp: ""},
+    {main: "Slutbunny", alt: "", epgp: ""},
+    {main: "Icaru", alt: "", epgp: ""},
+    {main: "Emilade", alt: "", epgp: ""},
+    {main: "Euphemina", alt: "", epgp: ""},
+    {main: "Holybanyan", alt: "", epgp: ""},
+    {main: "Danspatanku", alt: "", epgp: ""},
+    {main: "Elsen", alt: "", epgp: ""},
+    {main: "Demonshroute", alt: "", epgp: ""},
+    {main: "Meiyla", alt: "", epgp: ""},
+    {main: "Serpentis", alt: "", epgp: ""},
+    {main: "Derbbin", alt: "", epgp: ""},
+    {main: "Salenlord", alt: "", epgp: ""},
+    {main: "Zxdantexz", alt: "", epgp: ""},
+    {main: "Amiira", alt: "", epgp: ""},
+    {main: "Ilsdll", alt: "", epgp: ""},
+    {main: "Ktharsis", alt: "", epgp: ""},
+    {main: "Gavrilla", alt: "", epgp: ""},
+    {main: "Sekewar", alt: "", epgp: ""},
+    {main: "Nikandros", alt: "", epgp: ""},
+    {main: "Eddelle", alt: "", epgp: ""}
+];
+
+function loadTable() {
+    const tbody = document.getElementById("tableBody");
+    tbody.innerHTML = "";
+    data.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${row.main}</td>
+            <td>${row.alt}</td>
+            <td>${row.epgp}</td>
+            <td class="priority"></td>
+        `;
+        tbody.appendChild(tr);
+    });
+    calculatePriorities();
+}
+
+function calculatePriorities() {
+    document.querySelectorAll("tbody tr").forEach(tr => {
+        const epgpCell = tr.cells[2];
+        const priorityCell = tr.cells[3];
+        if (epgpCell && epgpCell.textContent.includes("/")) {
+            const [ep, gp] = epgpCell.textContent.split("/").map(n => parseFloat(n.trim()));
+            if (!isNaN(ep) && !isNaN(gp)) {
+                const prio = (ep / gp).toFixed(2);
+                priorityCell.textContent = prio;
+            }
+        }
+    });
+}
 
 function checkPassword(){
+    const pass = document.getElementById("passInput").value;
+    const error = document.getElementById("loginError");
 
-const selected=document.getElementById("charSelect").value;
-const pass=document.getElementById("passInput").value;
-const error=document.getElementById("loginError");
-
-if(!selected){
-error.textContent="Select a character first.";
-return;
+    if(pass === "guild123"){
+        document.getElementById("passwordScreen").style.display = "none";
+        document.getElementById("content").style.display = "block";
+        loadTable();
+    } else {
+        error.textContent = "Incorrect Password";
+    }
 }
-
-if(pass==="guild123"){
-document.getElementById("passwordScreen").style.display="none";
-document.getElementById("content").style.display="block";
-}else{
-error.textContent="Authentication Failed";
-}
-}
-
-document.getElementById("musicBtn").addEventListener("click",function(){
-document.getElementById("music").play();
-this.style.display="none";
-});
-
-function calcPriority(){
-
-const rows=[...document.querySelectorAll("tbody tr")];
-
-rows.forEach(r=>{
-
-const epgp=r.querySelector(".epgp").textContent.split(",");
-const ep=parseFloat(epgp[0]);
-const gp=parseFloat(epgp[1]);
-const prio=(ep/gp).toFixed(2);
-
-r.cells[3].textContent=prio;
-
-});
-
-rows.sort((a,b)=>parseFloat(b.cells[3].textContent)-parseFloat(a.cells[3].textContent));
-
-const tbody=document.querySelector("tbody");
-rows.forEach(r=>tbody.appendChild(r));
-
-}
-
-calcPriority();
-
 </script>
-
 </body>
 </html>
